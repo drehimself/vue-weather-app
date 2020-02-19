@@ -24,11 +24,10 @@
 
       <div class="future-weather text-sm bg-gray-800 px-6 py-8 overflow-hidden">
         <div
-          v-for="(day, index) in daily"
+          v-for="(day, index) in dailyFiveDays"
           :key="day.time"
           class="flex items-center"
           :class="{ 'mt-8' : index > 0 }"
-          v-if="index < 5"
         >
           <div class="w-1/6 text-lg text-gray-200">{{ toDayOfWeek(day.time) }}</div>
           <div class="w-4/6 px-4 flex items-center">
@@ -73,8 +72,6 @@ export default {
       placesAutocomplete.on('clear', function () {
         $address.textContent = 'none';
       });
-
-
   },
   watch: {
     location: {
@@ -82,6 +79,11 @@ export default {
         this.fetchData()
       },
       deep: true
+    }
+  },
+  computed: {
+    dailyFiveDays() {
+      return this.daily.filter((day, index) => index < 5 )
     }
   },
   data() {

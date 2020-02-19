@@ -1955,7 +1955,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -1986,6 +1985,13 @@ __webpack_require__.r(__webpack_exports__);
         this.fetchData();
       },
       deep: true
+    }
+  },
+  computed: {
+    dailyFiveDays: function dailyFiveDays() {
+      return this.daily.filter(function (day, index) {
+        return index < 5;
+      });
     }
   },
   data: function data() {
@@ -37475,49 +37481,47 @@ var render = function() {
             staticClass:
               "future-weather text-sm bg-gray-800 px-6 py-8 overflow-hidden"
           },
-          _vm._l(_vm.daily, function(day, index) {
-            return index < 5
-              ? _c(
-                  "div",
-                  {
-                    key: day.time,
-                    staticClass: "flex items-center",
-                    class: { "mt-8": index > 0 }
-                  },
-                  [
-                    _c("div", { staticClass: "w-1/6 text-lg text-gray-200" }, [
-                      _vm._v(_vm._s(_vm.toDayOfWeek(day.time)))
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "w-4/6 px-4 flex items-center" }, [
-                      _c("div", [
-                        _c("canvas", {
-                          attrs: {
-                            id: "icon" + (index + 1),
-                            "data-icon": _vm.toKebabCase(day.icon),
-                            width: "24",
-                            height: "24"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "ml-3" }, [
-                        _vm._v(_vm._s(day.summary))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "w-1/6 text-right" }, [
-                      _c("div", [
-                        _vm._v(_vm._s(Math.round(day.temperatureHigh)) + "°C")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(_vm._s(Math.round(day.temperatureLow)) + "°C")
-                      ])
-                    ])
-                  ]
-                )
-              : _vm._e()
+          _vm._l(_vm.dailyFiveDays, function(day, index) {
+            return _c(
+              "div",
+              {
+                key: day.time,
+                staticClass: "flex items-center",
+                class: { "mt-8": index > 0 }
+              },
+              [
+                _c("div", { staticClass: "w-1/6 text-lg text-gray-200" }, [
+                  _vm._v(_vm._s(_vm.toDayOfWeek(day.time)))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-4/6 px-4 flex items-center" }, [
+                  _c("div", [
+                    _c("canvas", {
+                      attrs: {
+                        id: "icon" + (index + 1),
+                        "data-icon": _vm.toKebabCase(day.icon),
+                        width: "24",
+                        height: "24"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ml-3" }, [
+                    _vm._v(_vm._s(day.summary))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-1/6 text-right" }, [
+                  _c("div", [
+                    _vm._v(_vm._s(Math.round(day.temperatureHigh)) + "°C")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v(_vm._s(Math.round(day.temperatureLow)) + "°C")
+                  ])
+                ])
+              ]
+            )
           }),
           0
         )
